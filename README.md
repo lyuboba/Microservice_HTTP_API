@@ -1,9 +1,4 @@
-# GreenatomTest
-___
- 
-
 ## Описание решения
-___
 
 Микросервис выполняет роль хранилища различных файлов и их атрибутов.
 Он предоставляет HTTP API и принимать/отдавать запросы/ответы в формате JSON.
@@ -16,74 +11,11 @@ ___
 + Контейнеризация: Docker
 + Формат данных: JSON
 
-## Реализованные API-методы
-___
-1. **Создание файла**:
-    - **Входной JSON**:
-      ```json
-      {
-        "title": "example",
-        "creation_date": "2024-01-01T12:00:00",
-        "description": "Example file",
-        "filedata": "SGVsbG8gd29ybGQh"  
-      }
-      ```
-    - **Выходной JSON**:
-      ```json
-      {
-        "id": 1
-      }
-      ```
-
-2. **Получение файла по id**:
-    - **Входной параметр**: `id` файла
-    - **Выходной JSON**:
-      ```json
-      {
-        "title": "example.txt",
-        "creation_date": "2024-01-01T12:00:00",
-        "description": "Example file",
-        "filedata": "SGVsbG8gd29ybGQh"   
-      }
-      ```
-
-3. **Получение списка файлов отсортированных по дате и времени создания** :
-    - **Входные параметры**: отсутствуют
-    - **Выходной JSON**:
-    - ```json
-      [
-        {
-          "fileData": "SGVsbG8gd29ybGQh",
-          "title": "example2",
-          "creationDate": "2024-01-01T12:00:00",
-          "description": "Second Example file"
-        },
-        {  
-          "fileData": "SGVsbG8gd29ybGQh",
-          "title": "example3",
-          "creationDate": "2024-02-01T12:00:00",
-          "description": "Third Example file"
-        },
-        {
-          "fileData": "SGVsbG8gd29ybGQh",
-          "title": "example1",
-          "creationDate": "2024-02-01T13:00:00",
-          "description": "First Example file"
-        }
-      ]
-      ```
-### Дополнительные возможности
-
-- Тестирование с использованием JUnit.
-- Docker-контейнеризация микросервиса вместе с базой данных PostgreSQL.
-
-## Инструкция по запуску приложения
-___
+## Запуск приложения
 
 ### Требования
 
-- Docker
-- Docker Compose
+- Установленные Docker и Docker Compose (среда Docker Desktop)
 
 ### Шаги для запуска
 
@@ -98,17 +30,18 @@ ___
    ```shell
    docker-compose up --build
    ```
-   эта команда создаст и запустит контейнеры для микросервиса и базы данных PostgreSQL.
+   Эта команда создаст и запустит контейнеры для микросервиса и базы данных PostgreSQL.
 
 3. **Доступ к api**
    После запуска контейнеров, микросервис будет доступен по адресу `http://localhost:8080`
 
 ## Примеры тестовых запросов для проверки API-методов
-___
+   Для тестирования можно использовать Postman или его аналог инструмента выполнения HTTP-запросов.
+
 + ### Создание файла
    Адрес: `http://localhost:8080/api/file_store` <br>
    HTTP-метод: `POST` <br>
-   Несколько примеров тела запроса(для дальнейшей проверки получения всех файлов с сортировкой):  
+  Примеры тела запроса (для дальнейшей проверки получения всех файлов с сортировкой):  
    ```json
   {
   "title": "example1",
@@ -140,4 +73,62 @@ ___
   *При указании несуществующего id предусмотрен json c exception* <br>
 + ### Получение списка файлов отсортированных по дате и времени создания
   Адрес: `http://localhost:8080/api/file_store` <br>
-  HTTP-метод: `GET` <br> 
+  HTTP-метод: `GET` <br>
+
+  
+## Реализованные API-методы
+
+1. **Создание файла**:
+   **Входной JSON**:
+      ```json
+      {
+        "title": "example",
+        "creation_date": "2024-01-01T12:00:00",
+        "description": "Example file",
+        "filedata": "SGVsbG8gd29ybGQh"  
+      }
+      ```
+   **Выходной JSON**:
+      ```json
+      {
+        "id": 1
+      }
+      ```
+
+2. **Получение файла по id**:
+   **Входной параметр**: `id` файла
+   **Выходной JSON**:
+      ```json
+      {
+        "title": "example.txt",
+        "creation_date": "2024-01-01T12:00:00",
+        "description": "Example file",
+        "filedata": "SGVsbG8gd29ybGQh"   
+      }
+      ```
+
+3. **Получение списка файлов отсортированных по дате и времени создания** :
+   **Входные параметры**: отсутствуют
+   **Выходной JSON**:
+   ```json
+      [
+        {
+          "fileData": "SGVsbG8gd29ybGQh",
+          "title": "example2",
+          "creationDate": "2024-01-01T12:00:00",
+          "description": "Second Example file"
+        },
+        {  
+          "fileData": "SGVsbG8gd29ybGQh",
+          "title": "example3",
+          "creationDate": "2024-02-01T12:00:00",
+          "description": "Third Example file"
+        },
+        {
+          "fileData": "SGVsbG8gd29ybGQh",
+          "title": "example1",
+          "creationDate": "2024-02-01T13:00:00",
+          "description": "First Example file"
+        }
+      ]
+      ```

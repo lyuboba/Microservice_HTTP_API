@@ -90,7 +90,7 @@ ___
 1. **Клонируйте репозиторий:**
 
    ```shell
-   git clone https://github.com/TBagirov/GreenatomTestTask.git
+   git clone https://github.com/lyuboba/Microservice_HTTP_API.git
    cd GreenatomTestTask
 
 2. **Соберите и запустите Docker-контейнеры:**

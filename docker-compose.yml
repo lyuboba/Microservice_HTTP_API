@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+  app:
+    container_name: "app"
+    image: tbagirov/filestore
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=PosTer231
+      - DB_URL=jdbc:postgresql://db:5432/postgres
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    container_name: "db"
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: PosTer231
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 2s
+      retries: 2
